@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FilterLab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar"><button id="burger" aria-label="Buka menu">Menu</button><span class="logo">FilterLab</span></header>
+
+<aside class="side">
+  <a class="logo" href="#beranda"><i class="px"><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b></i>FilterLab</a>
+  <p class="sub">Media belajar pemfilteran citra digital</p>
+  <div class="akun">
+    <h4>Akun</h4>
+    <p class="hint" id="akunInfo">Masuk dengan email student UNNES untuk identifikasi. Progres, jawaban, dan log eksperimen <b>tidak otomatis tersimpan di akun</b>; data tersimpan di browser perangkat ini. Data baru dapat dilanjutkan di perangkat lain jika kamu masuk dan sinkronisasi akun aktif.</p>
+    <button class="btn small" id="loginBtn" type="button">Masuk dengan email student UNNES</button>
+    <button class="btn small alt" id="logoutBtn" type="button" hidden>Keluar</button>
+    <p class="hint" id="cloudStatus" aria-live="polite"></p>
+  </div>
+  <nav>
+    <h4>Mulai</h4>
+    <a data-p="beranda" href="#beranda">Beranda</a>
+    <h4>Materi</h4>
+    <a data-p="dasar" href="#dasar">1. Dasar filtering</a>
+    <a data-p="filter" href="#filter">2. Jenis filter</a>
+    <h4>Praktik</h4>
+    <a data-p="simulasi" href="#simulasi">3. Simulasi piksel</a>
+    <a data-p="citra" href="#citra">4. Eksperimen citra</a>
+    <a data-p="lab" href="#lab">5. Lab Python</a>
+    <h4>Uji dan tinjau</h4>
+    <a data-p="analisis" href="#analisis">6. Analisis hasil</a>
+    <a data-p="evaluasi" href="#evaluasi">7. Evaluasi</a>
+    <a data-p="rangkuman" href="#rangkuman">8. Rangkuman</a>
+  </nav>
+  <h4>Tema warna</h4>
+  <div class="themes" id="themes">
+    <button class="sw" data-th="navy" style="background:linear-gradient(135deg,#1E3A8A 50%,#C9A24B 50%)" aria-label="Tema Navy"></button>
+    <button class="sw" data-th="graphite" style="background:linear-gradient(135deg,#334155 50%,#C0903A 50%)" aria-label="Tema Graphite"></button>
+    <button class="sw" data-th="emerald" style="background:linear-gradient(135deg,#0F5F4F 50%,#C9A24B 50%)" aria-label="Tema Emerald"></button>
+  </div>
+  <div class="prog"><span>Progres belajar <b id="pct">0%</b></span><div class="track"><div id="fill"></div></div></div>
+</aside>
+
+<main>
+<!-- ============ BERANDA ============ -->
+<section class="page" id="beranda">
+  <div class="hero">
+    <h1>Bersihkan noise, lihat piksel bekerja.</h1>
+    <p>FilterLab membantumu memahami Mean, Median, dan Gaussian Filter secara bertahap: dari konsep dan hitungan manual, simulasi piksel, eksperimen citra di browser, sampai praktikum Python dan evaluasi.</p>
+    <a class="btn" href="#dasar">Mulai belajar</a>
+  </div>
+  <div class="stats"><div class="stat"><b>8</b>halaman belajar</div><div class="stat"><b>3</b>jenis filter</div><div class="stat"><b>6</b>praktikum Python</div><div class="stat"><b>11</b>soal evaluasi</div></div>
+  <h2>Tentang media ini</h2>
+  <p class="lead">Banyak materi pemfilteran citra berhenti pada teori dan rumus. FilterLab menghubungkan empat hal dalam satu alur: konsep, perhitungan manual, eksperimen langsung, dan analisis hasil. Setelah menghitung satu piksel dengan tangan, kamu mencobanya pada seluruh citra, lalu mengulanginya dengan kode Python.</p>
+  <h2>Tujuan pembelajaran</h2>
+  <ol class="plain"><li>Menjelaskan konsep piksel, tetangga piksel, noise, kernel, dan konvolusi.</li><li>Membedakan noise Gaussian dan salt-and-pepper beserta penyebab tampilannya.</li><li>Menghitung hasil Mean, Median, dan Gaussian Filter pada jendela 3 × 3 secara manual.</li><li>Menjalankan ketiga filter dengan Python dan OpenCV, serta mengubah ukuran kernel.</li><li>Menganalisis hasil dengan MSE dan PSNR, lalu memilih filter yang tepat untuk jenis noise tertentu.</li></ol>
+  <h2>Prasyarat dan perkiraan waktu</h2>
+  <p class="lead">Kamu perlu memahami matriks dasar (baris, kolom, penjumlahan, perkalian) dan sedikit Python. Pengalaman OpenCV tidak diperlukan. Seluruh alur memerlukan sekitar 3 sampai 4 jam: materi 40 menit, simulasi dan eksperimen 60 menit, praktikum Colab 90 menit, analisis dan evaluasi 40 menit. Karena cukup lama, disarankan membagi belajar menjadi beberapa sesi (misalnya 30–45 menit) dan menandai progres tiap sesi.</p>
+  <h2>Alur belajar</h2>
+  <ol class="steps"><li><b>Pahami konsep</b> di halaman Dasar filtering dan Jenis filter.</li><li><b>Hitung manual</b> satu piksel pada Simulasi piksel dan bandingkan dengan hasil website.</li><li><b>Eksperimen</b> pada Eksperimen citra: ubah noise, filter, dan kernel, lalu simpan hasilnya ke log.</li><li><b>Praktikum</b> enam kegiatan di Lab Python (Google Colab).</li><li><b>Analisis dan evaluasi</b>: tulis kesimpulan dari log eksperimenmu, kerjakan kuis, lalu baca rangkuman.</li></ol>
+  <h2>Petunjuk penggunaan</h2>
+  <p class="lead">Ikuti menu sidebar dari atas ke bawah. Klik "Tandai selesai" di bagian bawah tiap halaman untuk menyimpan progres. Progres, jawaban esai, log eksperimen, dan tema warna <b>tidak otomatis tersimpan di akun</b>, melainkan tersimpan di browser perangkat ini. Jika kamu masuk dan sinkronisasi akun aktif, data disinkronkan sehingga dapat dilanjutkan di perangkat lain. Di ponsel, buka menu lewat tombol Menu di pojok atas.</p>
+  <h2>Peta belajar</h2>
+  <div class="cards" id="peta"></div>
+</section>
+
+<!-- ============ DASAR ============ -->
+<section class="page" id="dasar" hidden>
+  <h1>1. Dasar pemfilteran citra</h1>
+  <p class="lead">Halaman ini membangun fondasi sebelum masuk ke algoritma. Baca berurutan, lalu kerjakan aktivitas di bagian akhir.</p>
+
+  <h2>1.1 Citra digital adalah matriks angka</h2>
+  <p class="lead">Citra grayscale tersusun dari piksel yang masing-masing bernilai 0 (hitam) sampai 255 (putih). Citra 96 × 96 berarti 9.216 angka. Citra berwarna menyimpan tiga matriks seperti itu (merah, hijau, biru). Di FilterLab kita memakai grayscale agar perhitungannya mudah diikuti.</p>
+  <div class="two">
+    <div class="box"><h3>Penampil piksel</h3><p class="hint">Klik bagian mana pun pada citra untuk melihat koordinat dan nilainya.</p><canvas id="cvD" width="96" height="96" aria-label="Citra contoh, klik untuk melihat nilai piksel"></canvas><p id="pxInfo" aria-live="polite">Belum ada piksel dipilih.</p></div>
+    <div class="box"><h3>Potongan matriks 4 × 4</h3><div class="tbl"><table class="wk"><tr><td>52</td><td>55</td><td>61</td><td>59</td></tr><tr><td>62</td><td>59</td><td>55</td><td>104</td></tr><tr><td>63</td><td>65</td><td>255</td><td>70</td></tr><tr><td>58</td><td>64</td><td>70</td><td>60</td></tr></table></div><p>Angka 255 di tengah jauh berbeda dari sekitarnya. Nilai seperti inilah yang kita sebut noise.</p></div>
+  </div>
+
+  <h2>1.2 Mengapa citra perlu difilter</h2>
+  <p class="lead">Citra dari kamera, pemindai, atau citra medis sering membawa gangguan akibat sensor, cahaya redup, kompresi, atau kesalahan transmisi. Pemfilteran dipakai untuk mengurangi gangguan itu sebelum langkah berikutnya seperti deteksi tepi, segmentasi, atau pengenalan objek. Tanpa filtering, noise sering terbaca sebagai tepi atau objek palsu.</p>
+
+  <h2>1.3 Dua jenis noise utama</h2>
+  <div class="two">
+    <div class="box"><h3>Gaussian</h3><p>Setiap piksel bergeser sedikit secara acak mengikuti distribusi normal. Citra tampak berbutir halus di seluruh bagian. Umum terjadi pada foto cahaya redup atau ISO tinggi.</p><canvas id="cvN1" width="96" height="96" aria-label="Contoh noise Gaussian"></canvas></div>
+    <div class="box"><h3>Salt-and-pepper</h3><p>Sebagian kecil piksel berubah ekstrem menjadi 0 (pepper) atau 255 (salt), tampak sebagai bintik hitam dan putih. Umum akibat kesalahan transmisi atau piksel sensor yang rusak.</p><canvas id="cvN2" width="96" height="96" aria-label="Contoh noise salt-and-pepper"></canvas></div>
+  </div>
+
+  <h2>1.4 Piksel, tetangga, dan jendela</h2>
+  <p class="lead">Filter bekerja per piksel dengan melihat lingkungannya. Pada jendela 3 × 3, piksel pusat memiliki delapan tetangga: empat di sisi (atas, bawah, kiri, kanan) dan empat di diagonal. Jendela 5 × 5 melibatkan 24 tetangga sehingga efeknya lebih kuat tetapi juga lebih memburamkan.</p>
+
+  <h2>1.5 Kernel dan konvolusi</h2>
+  <p class="lead">Kernel (disebut juga mask) adalah matriks kecil berisi bobot. Pada setiap posisi, kernel ditempatkan di atas jendela piksel, setiap nilai piksel dikalikan bobot yang bersesuaian, lalu semuanya dijumlahkan menjadi satu piksel keluaran.</p>
+  <div class="formula">g(x, y) = Σ Σ  w(i, j) × f(x + i, y + j)   dengan i, j = -1, 0, 1 untuk kernel 3 × 3</div>
+  <p class="lead">Keterangan: f adalah citra masukan, g citra keluaran, dan w bobot kernel. Mean dan Gaussian termasuk filter linear karena memakai rumus ini. Median bukan filter linear sebab ia mengurutkan nilai, bukan menjumlahkan bobot. Secara ketat, konvolusi membalik kernel terlebih dahulu; karena kernel Mean dan Gaussian simetris, hasilnya sama dengan korelasi di atas.</p>
+
+  <h2>1.6 Penanganan tepi citra</h2>
+  <p class="lead">Piksel di tepi tidak punya tetangga lengkap. Ada tiga cara umum: zero padding (menambah nilai 0), replicate (menyalin piksel tepi), dan reflect (mencerminkan piksel). Demo di website ini memakai replicate, sedangkan OpenCV memakai reflect101 secara bawaan. Pada simulasi 5 × 5, piksel tepi sengaja tidak dihitung agar jendelanya selalu lengkap.</p>
+
+  <h2>1.7 Aktivitas identifikasi</h2>
+  <p class="lead">Buka halaman Eksperimen citra, lalu jawab pertanyaan berikut. Jawabanmu tersimpan otomatis.</p>
+  <div class="box"><p><b>a.</b> Apa perbedaan tampilan citra bernoise Gaussian dan salt-and-pepper?</p><textarea data-k="d1" placeholder="Tulis jawabanmu"></textarea></div>
+  <div class="box"><p><b>b.</b> Pada citra mana noise lebih mudah dikenali dengan mata, dan mengapa?</p><textarea data-k="d2" placeholder="Tulis jawabanmu"></textarea></div>
+  <div class="box"><p><b>c.</b> Menurutmu, apa yang terjadi pada tepi objek ketika jendela filter diperbesar?</p><textarea data-k="d3" placeholder="Tulis jawabanmu"></textarea></div>
+</section>
+
+<!-- ============ FILTER ============ -->
+<section class="page" id="filter" hidden>
+  <h1>2. Jenis-jenis filter</h1>
+  <p class="lead">Materi dibatasi pada tiga metode yang paling mendasar. Setiap filter dijelaskan dengan format sama: pengertian, cara kerja, rumus, kernel, contoh hitung, kelebihan dan kekurangan, serta kapan dipakai.</p>
+  <div class="tabs" id="tabsFilter"><button class="tab on" data-t="mean">Mean</button><button class="tab" data-t="median">Median</button><button class="tab" data-t="gauss">Gaussian</button></div>
+  <div id="panel"></div>
+  <h2>Pengaruh ukuran kernel</h2>
+  <p class="lead">Kernel 3 × 3 menghaluskan ringan dan menjaga detail. Kernel 5 × 5 dan 7 × 7 meredam noise lebih kuat, tetapi tepi dan detail halus ikut hilang, dan waktu proses bertambah (pada Median, jumlah nilai yang diurutkan membesar dari 9 menjadi 25 dan 49). Ukuran kernel selalu ganjil agar ada satu piksel pusat.</p>
+  <h2>Perbandingan ringkas</h2>
+  <div class="tbl"><table><tr><th>Aspek</th><th>Mean</th><th>Median</th><th>Gaussian</th></tr>
+  <tr><td>Sifat</td><td>Linear</td><td>Non-linear</td><td>Linear</td></tr>
+  <tr><td>Bobot</td><td>Sama rata</td><td>Tanpa bobot</td><td>Menurun dari pusat</td></tr>
+  <tr><td>Noise paling cocok</td><td>Gaussian ringan</td><td>Salt-and-pepper</td><td>Gaussian</td></tr>
+  <tr><td>Efek pada tepi</td><td>Buram</td><td>Cenderung terjaga</td><td>Sedikit buram</td></tr>
+  <tr><td>Kecepatan</td><td>Cepat</td><td>Lebih lambat</td><td>Cepat</td></tr>
+  <tr><td>Fungsi OpenCV</td><td>cv2.blur</td><td>cv2.medianBlur</td><td>cv2.GaussianBlur</td></tr></table></div>
+</section>
+
+<!-- ============ SIMULASI ============ -->
+<section class="page" id="simulasi" hidden>
+  <h1>3. Simulasi perhitungan piksel</h1>
+  <p class="lead">Pilih contoh data, klik satu piksel di bagian dalam, lalu ikuti langkah perhitungannya. Hitung dulu dengan tangan, baru cocokkan dengan hasil di sini.</p>
+  <div class="row"><label>Contoh data <select id="preset"><option value="sp">Salt-and-pepper (ada piksel 255)</option><option value="gs">Noise Gaussian</option><option value="edge">Area tepi (gelap ke terang)</option></select></label></div>
+  <div class="sim">
+    <div><h3>Citra 5 × 5</h3><div id="grid" class="grid"></div><p class="hint">Biru: jendela 3 × 3. Merah muda: piksel pusat.</p></div>
+    <div><h3>Kernel</h3><div id="kernel" class="grid k"></div>
+      <div class="tabs small" id="pilih"><button class="tab on" data-f="mean">Mean</button><button class="tab" data-f="median">Median</button><button class="tab" data-f="gauss">Gaussian</button></div></div>
+    <div class="box"><h3>Perhitungan</h3><p id="langkah"></p><div class="tbl" id="tabelHit"></div><h3>Perbandingan ketiga filter</h3><div id="banding"></div></div>
+  </div>
+  <h2>Hasil untuk seluruh area dalam</h2>
+  <p class="lead">Dengan filter yang dipilih, berikut keluaran 3 × 3 untuk semua piksel bagian dalam. Perhatikan bagaimana noise 255 berubah.</p>
+  <div class="grid k" id="hasilGrid"></div>
+  <h2>Pertanyaan refleksi</h2>
+  <div class="box"><p>Pada contoh salt-and-pepper, bandingkan hasil Mean dan Median di piksel pusat. Mengapa angkanya berbeda jauh?</p><textarea data-k="s1" placeholder="Tulis jawabanmu"></textarea></div>
+</section>
+
+<!-- ============ CITRA ============ -->
+<section class="page" id="citra" hidden>
+  <h1>4. Eksperimen citra</h1>
+  <p class="lead">Citra diproses langsung di browser. Ubah pengaturan, amati ketiga citra dan peta selisih, lalu simpan hasil menarik ke log untuk dianalisis di halaman berikutnya.</p>
+  <div class="ctrl box">
+    <label>Sumber citra<select id="cSrc"><option value="uji">Citra uji bawaan</option><option value="unggah">Unggah gambarku</option></select></label>
+    <label id="lblFile" hidden>Berkas gambar<input type="file" id="cFile" accept="image/*"></label>
+    <label>Noise<select id="cNoise"><option value="sp">Salt-and-pepper</option><option value="g">Gaussian</option></select></label>
+    <label>Tingkat noise <output id="oAmt">10</output>%<input id="cAmt" type="range" min="1" max="40" value="10"></label>
+    <label>Filter<select id="cFilter"><option value="median">Median</option><option value="mean">Mean</option><option value="gauss">Gaussian</option></select></label>
+    <label>Kernel<select id="cK"><option>3</option><option>5</option><option>7</option></select></label>
+    <button class="btn small" id="cSeed">Acak ulang noise</button>
+    <button class="btn small alt" id="cSave">Simpan ke log</button>
+  </div>
+  <p class="hint" id="cInfo">Gambar yang diunggah diubah menjadi grayscale 96 × 96 piksel dan hanya diproses di perangkatmu.</p>
+  <div class="imgs">
+    <figure><canvas id="cv0" width="96" height="96"></canvas><figcaption>Asli</figcaption></figure>
+    <figure><canvas id="cv1" width="96" height="96"></canvas><figcaption>Bernoise</figcaption></figure>
+    <figure><canvas id="cv2" width="96" height="96"></canvas><figcaption>Hasil filter</figcaption></figure>
+    <figure><canvas id="cv3" width="96" height="96"></canvas><figcaption>Selisih dengan asli (diperkuat)</figcaption></figure>
+  </div>
+  <div class="box"><h3>Kualitas (PSNR, makin tinggi makin baik)</h3><div id="metrik"></div><p class="hint">PSNR dihitung terhadap citra asli. Kolom MSE di log berasal dari hasil filter yang kamu pilih.</p></div>
+</section>
+
+<!-- ============ LAB ============ -->
+<section class="page" id="lab" hidden>
+  <h1>5. Laboratorium Python</h1>
+  <p class="lead">Enam praktikum terpandu di Google Colab. Satu notebook utama dibagi menjadi kegiatan berurutan; buka tiap lipatan di bawah untuk membaca tujuan, teori singkat, kode, langkah, parameter yang boleh diubah, dan pertanyaan analisis.</p>
+  <a class="btn alt" href="https://colab.research.google.com/drive/1AhJznwTXUGm_JSaDauCk5xWhSoMzoma1?usp=sharing" target="_blank" rel="noopener">Buka di Colab</a>
+  <div class="box"><h3>Persiapan</h3><p>Masuk dengan akun Google, buka notebook, lalu pilih File lalu Save a copy in Drive agar salinanmu bisa diedit. OpenCV, NumPy, dan Matplotlib sudah tersedia di Colab. Jalankan sel dengan Shift+Enter, berurutan dari atas, karena praktikum selanjutnya memakai variabel dari praktikum sebelumnya.</p></div>
+  <div id="praktikum"></div>
+  <div class="box"><h3>Kesalahan yang sering terjadi</h3><dl><dt>cv2.imread mengembalikan None</dt><dd>Nama atau lokasi berkas salah. Periksa panel berkas di sisi kiri Colab.</dd><dt>Error pada medianBlur</dt><dd>Ukuran kernel harus ganjil dan lebih dari 1, misalnya 3, 5, atau 7.</dd><dt>Warna gambar tampak aneh</dt><dd>OpenCV membaca BGR. Konversi ke RGB sebelum ditampilkan dengan Matplotlib.</dd></dl></div>
+</section>
+
+<!-- ============ ANALISIS ============ -->
+<section class="page" id="analisis" hidden>
+  <h1>6. Analisis dan perbandingan hasil</h1>
+  <h2>Ukuran kualitas</h2>
+  <div class="formula">MSE  = (1 / N) × Σ (asli - hasil)²<br>PSNR = 10 × log10( 255² / MSE )   [dB]</div>
+  <p class="lead">MSE mengukur rata-rata kuadrat selisih piksel; makin kecil makin baik. PSNR mengubahnya ke skala desibel; makin besar makin dekat ke citra asli. Untuk citra 8 bit, PSNR sekitar 30 dB ke atas umumnya tampak cukup baik. PSNR tidak selalu sejalan dengan penilaian mata, jadi selalu lihat citranya juga.</p>
+  <h2>Kesesuaian filter dan noise</h2>
+  <div class="tbl"><table><tr><th>Filter</th><th>Salt-and-pepper</th><th>Gaussian</th><th>Tepi</th></tr><tr><td>Mean</td><td>Kurang baik</td><td>Cukup</td><td>Buram</td></tr><tr><td>Median</td><td>Sangat baik</td><td>Cukup</td><td>Terjaga</td></tr><tr><td>Gaussian</td><td>Kurang baik</td><td>Baik</td><td>Sedikit buram</td></tr></table></div>
+  <h2>Log eksperimenmu</h2>
+  <p class="lead">Hasil yang kamu simpan dari halaman Eksperimen citra muncul di sini. Gunakan sebagai bukti untuk jawaban analisis.</p>
+  <div class="tbl"><table id="logTbl"><thead><tr><th>#</th><th>Noise</th><th>Tingkat</th><th>Filter</th><th>Kernel</th><th>MSE</th><th>PSNR</th></tr></thead><tbody></tbody></table></div>
+  <p id="logKosong" class="hint">Log masih kosong.</p><button class="btn small" id="logHapus">Hapus log</button>
+  <h2>Cara menafsirkan hasil</h2>
+  <p class="lead">Bandingkan PSNR sebelum dan sesudah filter. Jika PSNR naik, filter berhasil meredam noise. Jika PSNR turun padahal noise ringan, kernel terlalu besar sehingga detail asli ikut terhapus. Ulangi dengan seed noise berbeda untuk memastikan kesimpulanmu bukan kebetulan.</p>
+  <h2>Pertanyaan analisis</h2>
+  <p class="lead">Jawab dengan bukti dari log eksperimenmu. Tombol pembahasan terbuka setelah kamu menulis jawaban sendiri. Selesai? Unduh laporan di halaman <a href="#rangkuman">Rangkuman</a>.</p>
+  <div id="essay"></div>
+</section>
+
+<!-- ============ EVALUASI ============ -->
+<section class="page" id="evaluasi" hidden>
+  <h1>7. Evaluasi</h1>
+  <p class="lead">Terdiri dari soal konsep, latihan menghitung, dan studi kasus. Setiap jawaban langsung mendapat umpan balik.</p>
+  <div id="kuis"></div>
+  <div class="box"><p id="skor">Jawab semua soal untuk melihat skor.</p><button class="btn small" id="ulang">Ulangi evaluasi</button></div>
+</section>
+
+<!-- ============ RANGKUMAN ============ -->
+<section class="page" id="rangkuman" hidden>
+  <h1>8. Rangkuman dan glosarium</h1>
+  <h2>Ringkasan materi</h2>
+  <p class="lead">Citra digital adalah matriks piksel. Noise adalah gangguan pada nilai piksel; Gaussian berupa butiran halus di seluruh citra, salt-and-pepper berupa bintik ekstrem. Filter menghitung ulang tiap piksel dari jendela tetangganya. Mean merata-ratakan, Median mengambil nilai tengah, dan Gaussian merata-ratakan dengan bobot yang menurun dari pusat. Median unggul untuk salt-and-pepper, Gaussian untuk noise Gaussian, dan semakin besar kernel semakin kuat penghalusan sekaligus semakin buram hasilnya. MSE dan PSNR membantu membandingkan hasil secara objektif.</p>
+  <h2>Cek kesiapan</h2>
+  <div id="ceklis"></div>
+  <h2>Fungsi OpenCV yang dipakai</h2>
+  <div class="tbl"><table><tr><th>Tujuan</th><th>Fungsi</th></tr><tr><td>Membaca dan mengubah warna</td><td>cv2.imread, cv2.cvtColor</td></tr><tr><td>Mean Filter</td><td>cv2.blur(img, (k, k))</td></tr><tr><td>Median Filter</td><td>cv2.medianBlur(img, k)</td></tr><tr><td>Gaussian Filter</td><td>cv2.GaussianBlur(img, (k, k), 0)</td></tr><tr><td>Mengukur kualitas</td><td>cv2.PSNR(asli, hasil)</td></tr></table></div>
+  <h2>Glosarium</h2>
+  <input type="search" id="cari" placeholder="Cari istilah" aria-label="Cari istilah glosarium">
+  <dl id="glos"></dl>
+  <h2>Kumpulkan hasil belajar</h2>
+  <p class="lead">Jawaban, log eksperimen, dan skor <b>tidak otomatis tersimpan di akun</b>, melainkan tersimpan di browser perangkat ini. Jika kamu masuk dan sinkronisasi akun aktif, data juga disinkronkan ke akunmu. Isi identitasmu, lalu unduh laporan untuk dikumpulkan atau dibagikan kepada pengajar.</p>
+  <div class="row"><input type="text" id="exNama" placeholder="Nama" aria-label="Nama"><input type="text" id="exNim" placeholder="NIM (opsional)" aria-label="NIM"><button class="btn small" id="exUnduh">Unduh laporan (.txt)</button><button class="btn small alt" id="exSalin">Salin teks</button></div>
+  <p id="exInfo" class="hint" aria-live="polite"></p>
+  <h2>Referensi</h2>
+  <p class="lead">Dokumentasi OpenCV tentang penghalusan citra: <a href="https://docs.opencv.org/4.x/d4/d13/tutorial_py_filtering.html" target="_blank" rel="noopener">docs.opencv.org, Smoothing Images</a>.</p>
+</section>
+</main>
+<script src="script.js"></script>
+<script type="module" src="cloud.js"></script>
+</body>
+</html>

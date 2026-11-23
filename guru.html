@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FilterLab | Panel pengajar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>main.guru{margin:0 auto;max-width:1100px;padding:2rem 5vw 4rem}.bar2{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;margin:1rem 0}details.s summary{display:flex;flex-wrap:wrap;gap:.4rem 1.2rem;align-items:center}.pill{background:var(--t1);border-radius:99px;padding:0 .7rem;font-weight:700;font-size:.9rem}.jw{background:var(--t2);border-radius:8px;padding:.5rem .8rem;margin:.2rem 0 .8rem;white-space:pre-wrap}</style>
+</head>
+<body>
+<main class="guru">
+  <p><a href="index.html">&larr; Kembali ke FilterLab</a></p>
+  <h1>Panel pengajar</h1>
+  <p class="lead" id="pesan">Masuk dengan akun pengajar UNNES yang terdaftar di aturan Firestore.</p>
+  <div class="bar2">
+    <button class="btn small" id="masuk" type="button">Masuk dengan akun UNNES</button>
+    <button class="btn small alt" id="keluar" type="button" hidden>Keluar</button>
+    <input type="search" id="cari" placeholder="Cari nama, email, atau NIM" aria-label="Cari mahasiswa" hidden>
+    <button class="btn small" id="csv" type="button" hidden>Unduh CSV</button>
+  </div>
+  <div id="ringkas" class="stats" hidden></div>
+  <div id="daftar"></div>
+</main>
+<script type="module" src="guru.js"></script>
+</body>
+</html>
